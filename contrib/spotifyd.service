@@ -7,7 +7,10 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-ExecStart=/usr/bin/spotifyd --no-daemon
+Type=dbus
+ExecStart=/home/fons/spotifyd --no-daemon
+User=fons
+BusName=org.mpris.MediaPlayer2.spotifyd
 Restart=always
 RestartSec=12
 
