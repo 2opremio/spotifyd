@@ -1,5 +1,9 @@
-[target.aarch64-unknown-linux-gnu]
-image = "spotifyd-cross:aarch64-unknown-linux-gnu"
-
-[target.armv7-unknown-linux-gnueabihf]
-image = "spotifyd-cross:armv7-unknown-linux-gnueabihf"
+[build]
+build-std = false                                   # do not build the std library. has precedence over xargo
+#xargo = true                                        # enable the use of xargo by default
+zig = false                                         # do not use zig cc for the builds
+default-target = "armv7-unknown-linux-gnueabihf"    # use this target if none is explicitly provided
+pre-build = [                                       # additional commands to run prior to building the package
+    "dpkg --add-architecture $CROSS_DEB_ARCH",
+    "apt-get update && apt-get --assume-yes install libasound2-dev:$CROSS_DEB_ARCH libssl-dev:$CROSS_DEB_ARCH libdbus-1-dev:$CROSS_DEB_ARCH"
+]

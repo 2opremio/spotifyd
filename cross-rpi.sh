@@ -1,3 +1,2 @@
 #!/bin/sh
-export BUILD_TARGET=armv7-unknown-linux-gnueabihf
-exec ./cross.sh $@
+exec cross build --target armv7-unknown-linux-gnueabihf $@
